@@ -1,0 +1,30 @@
+import random
+import math
+import string
+import sympy
+
+
+x= list(sympy.primerange(1,10000))
+print(x)
+
+letters = string.digits + string.ascii_lowercase 
+num = ''.join(random.choice(letters) for i in range(12)) 
+
+seed=str(int(num,36))
+
+def densityChecker(mod,numberset,trialamt,averagedenom,predicted,setname=''):
+    listz=[]
+    for y in range (averagedenom):
+        z=0
+        for x in range(trialamt):
+            num = ''.join(random.choice(letters) for i in range(12)) 
+            num = int(num,36)
+            seedmod = (num % mod)
+            for x in range (len(numberset)):
+                if numberset[x] == seedmod:
+                    z+=1
+                    
+        listz.append(z)
+    observed = ((sum(listz))/(averagedenom*trialamt))
+    residual = (round((observed - predicted),6))
+    return(observed)
